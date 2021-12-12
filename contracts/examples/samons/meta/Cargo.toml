@@ -1,0 +1,17 @@
+[package]
+name = "samons-meta"
+version = "0.0.0"
+authors = ["Dorin Iancu <dorin.iancu@elrond.com>"]
+edition = "2018"
+publish = false
+
+[dependencies.samons]
+path = ".."
+
+[dependencies.elrond-wasm]
+version = "0.23.0"
+path = "../../../../elrond-wasm"
+
+[dependencies.elrond-wasm-debug]
+version = "0.23.0"
+path = "../../../../elrond-wasm-debug"

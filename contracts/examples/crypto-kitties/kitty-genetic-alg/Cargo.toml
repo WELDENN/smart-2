@@ -1,0 +1,26 @@
+[package]
+name = "kitty-genetic-alg"
+version = "0.0.0"
+authors = [ "dorin-iancu <dorin.iancu@elrond.com>",]
+edition = "2018"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+
+[dependencies.kitty]
+version = "0.0.0"
+path = "../common/kitty"
+
+[dependencies.random]
+version = "0.0.0"
+path = "../common/random"
+
+[dependencies.elrond-wasm]
+version = "0.23.0"
+path = "../../../../elrond-wasm"
+
+[dev-dependencies.elrond-wasm-debug]
+version = "0.23.0"
+path = "../../../../elrond-wasm-debug"
