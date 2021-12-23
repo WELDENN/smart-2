@@ -7,6 +7,7 @@ use elrond_wasm::types::TokenIdentifier;
 
 const NFT_AMOUNT: u32 = 1; // minting amount of NFT : for now users can mint 1 at once
 const SELLING_PRICE: u64 = 350000000000000000; // selling price  0.05 EGLD  0.35
+const ISSUE_COST: u64 = 50000000000000000; // selling price  0.05 EGLD  0.35
 const ROYALTIES_MAX: u32 = 5_000; // 300  3%  400
 
 #[derive(TypeAbi, TopEncode, TopDecode)]
@@ -23,16 +24,17 @@ pub trait NftModule {
     #[only_owner]
     #[payable("EGLD")]
     #[endpoint(issueToken)]
-    fn issue_token(&self) -> SCResult<AsyncCall> {
+    fn issue_token(
+        &self
+    ) -> SCResult<AsyncCall> {
         require!(self.nft_token_id().is_empty(), "Token already issued");
-
         Ok(self
             .send()
             .esdt_system_sc_proxy()
             .issue_non_fungible(
-                BigUint::from(SELLING_PRICE),
+                BigUint::from(ISSUE_COST),
                 &ManagedBuffer::new_from_bytes(b"BabiesDegenApe"),
-                &ManagedBuffer::new_from_bytes(b"BDAPE"),
+        &ManagedBuffer::new_from_bytes(b"BDAPE"),
                 NonFungibleTokenProperties {
                     can_freeze: true,
                     can_wipe: true,
@@ -45,6 +47,7 @@ pub trait NftModule {
             .async_call()
             .with_callback(self.callbacks().issue_callback()))
     }
+    
 
     #[only_owner]
     #[endpoint(setLocalRoles)]

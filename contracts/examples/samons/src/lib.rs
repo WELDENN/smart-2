@@ -26,10 +26,10 @@ pub trait NftMinter: nft_module::NftModule {
 
         let caller = self.blockchain().get_caller();
         let user_balance = self.blockchain().get_balance(&caller);
-          let price:u64 = 50000000000000000u64; // selling price
+          let price:u64 = 350000000000000000u64; // selling price
 
         require!(
-            user_balance < price,
+            user_balance < BigUint::from(price),
             "You don't have enough EGLD to mint"
         );
 
